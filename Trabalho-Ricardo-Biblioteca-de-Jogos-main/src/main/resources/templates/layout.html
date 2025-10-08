@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br" th:fragment="layout(title, content)">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:replace="${title}">Biblioteca de Jogos</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+    />
+
+    <style>
+        body.dark-mode {
+            background-color: #121212;
+            color: #e4e4e4;
+        }
+
+        .dark-mode .navbar {
+            background-color: #1c1c1c !important;
+        }
+
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            color: #ddd;
+            border-color: #333;
+        }
+
+        .dark-mode input.form-control,
+        .dark-mode select.form-select,
+        .dark-mode textarea.form-control {
+            background-color: #2b2b2b;
+            border-color: #444;
+            color: #eee;
+        }
+
+        .dark-mode input.form-control:focus,
+        .dark-mode select.form-select:focus {
+            background-color: #333;
+            border-color: #666;
+            color: #fff;
+        }
+
+        .dark-mode .btn-outline-secondary {
+            color: #f0f0f0;
+            border-color: #777;
+        }
+
+        .dark-mode .btn-outline-secondary:hover {
+            background-color: #555;
+        }
+
+        .dark-mode footer {
+            border-top: 1px solid #333;
+            color: #aaa;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: #ccc;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        .theme-toggle:hover {
+            color: #fff;
+        }
+
+        footer a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/jogos}">🎮 Biblioteca de Jogos</a>
+        <button id="themeToggle" class="theme-toggle ms-auto" title="Alternar tema">🌓</button>
+    </div>
+</nav>
+
+<main class="container">
+    <div th:replace="${content}"></div>
+</main>
+
+<footer class="container text-center mt-5 py-3">
+    <p>2025 Biblioteca de Jogos - Felipe Paião Ferreira</p>
+</footer>
+
+<script>
+    const body = document.body;
+    const themeBtn = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'dark') body.classList.add('dark-mode');
+
+    themeBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
+</script>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>
